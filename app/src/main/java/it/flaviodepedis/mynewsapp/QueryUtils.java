@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper methods related to requesting and receiving news item data from OpenWeatherMap.
+ * Helper methods related to requesting and receiving news item data from TheGuardian API.
  */
 public final class QueryUtils {
 
@@ -166,7 +166,7 @@ public final class QueryUtils {
         try {
 
             JSONObject newsJsonResponse;    // JSON Object for the data retrieved from API request
-            JSONArray newsJsonArray;
+            JSONArray newsJsonArray;        // Array of News Items
 
             String mNewsTitle = "";
             String mNewsSection = "";
