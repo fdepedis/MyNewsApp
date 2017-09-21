@@ -5,5 +5,10 @@
     <!-- Text to display application label in splash screen -->
     <string name="legal_property">FDP Development - rev.1.0</string>
 
+    <!-- Text to display no news item information -->
+    <string name="no_news_item">No news item available</string>
+
+    <!-- Error message when there is no internet connectivity -->
+    <string name="no_internet_connection">No internet connection.</string>
 
 </resources>
