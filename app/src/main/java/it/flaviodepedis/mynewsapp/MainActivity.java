@@ -114,13 +114,18 @@ public class MainActivity extends AppCompatActivity
 
         Log.i(LOG_TAG, "Log - onCreateLoader() method");
 
-        Intent intent = getIntent();
-        String query = intent.getStringExtra("nameSearch");
+        String section = "sport";
 
         Uri baseUri = Uri.parse(OPEN_NEWS_ITEM_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        //uriBuilder.appendQueryParameter("q", query);
-        // uriBuilder.appendQueryParameter("maxResults", MAX_RESULT);
+        uriBuilder.appendQueryParameter("section", section);                            //pref
+        uriBuilder.appendQueryParameter("format", "json");
+        uriBuilder.appendQueryParameter("from-date", "2017-01-01");                     //pref
+        uriBuilder.appendQueryParameter("page-size", "5");                              //pref
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("show-fields", "headline,thumbnail,short-url");
+        uriBuilder.appendQueryParameter("order-by", "relevance");                       //pref
+        uriBuilder.appendQueryParameter("api-key", "test");
 
         // Create a new loader for the given URL
         return new NewsItemLoader(this, uriBuilder.toString());
@@ -146,7 +151,6 @@ public class MainActivity extends AppCompatActivity
         if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
         }
-
     }
 
     @Override

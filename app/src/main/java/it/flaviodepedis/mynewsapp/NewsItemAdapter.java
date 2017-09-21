@@ -28,9 +28,6 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        String imageIcon;
-        float averageRating;
-
         // Check if there is an existing list item view (called convertView) that we can reuse,
         // otherwise, if convertView is not null, then inflate a new list item layout.
         View listItemView = convertView;
