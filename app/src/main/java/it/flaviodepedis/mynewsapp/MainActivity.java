@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity
     private static final int NEWS_LOADER_ID = 1;
 
     /**
-     * URL for book data from the Google Book API dataset
+     * URL for news item data from the Google Book API dataset
      */
     private static String OPEN_NEWS_ITEM_REQUEST_URL =
-            "https://www.googleapis.com/books/v1/volumes?";
+            "https://content.guardianapis.com/search?";
 
     /**
      * TextView that is displayed when the list is empty
@@ -54,17 +54,17 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         // Find a reference to the {@link ListView} in the layout
-        ListView bookListView = (ListView) findViewById(R.id.list);
+        ListView newsItemListView = (ListView) findViewById(R.id.list);
 
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
-        bookListView.setEmptyView(mEmptyStateTextView);
+        newsItemListView.setEmptyView(mEmptyStateTextView);
 
-        // Create a new adapter that takes an empty list of books as input
+        // Create a new adapter that takes an empty list of newsItem as input
         mAdapter = new NewsItemAdapter(this, new ArrayList<NewsItem>());
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
-        bookListView.setAdapter(mAdapter);
+        newsItemListView.setAdapter(mAdapter);
 
         //Search only if network is available else show proper message
         if (isNetworkWorking()) {
@@ -91,14 +91,14 @@ public class MainActivity extends AppCompatActivity
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
-        bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        newsItemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 // Find the current newsItem that was clicked on
                 NewsItem currNewsItem = mAdapter.getItem(position);
 
-                String newsUri = "";
+                String newsUri = ""; //currNewsItem.getURL
 
                 // Create a new intent to view the news item in the browser
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(newsUri));
@@ -135,10 +135,10 @@ public class MainActivity extends AppCompatActivity
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
-        // Set empty state text to display "No book found."
+        // Set empty state text to display "No news item found."
         mEmptyStateTextView.setText(R.string.no_news_item);
 
-        // Clear the adapter of previous book data
+        // Clear the adapter of previous news item data
         mAdapter.clear();
 
         // If there is a valid list of {@link Book}s, then add them to the adapter's
