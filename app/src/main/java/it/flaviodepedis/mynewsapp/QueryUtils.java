@@ -6,11 +6,16 @@ package it.flaviodepedis.mynewsapp;
 
 import android.content.Context;
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import android.text.TextUtils;
+
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -165,8 +170,11 @@ public final class QueryUtils {
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
 
-            JSONObject newsJsonResponse;    // JSON Object for the data retrieved from API request
-            JSONArray newsJsonArray;        // Array of News Items
+            JSONObject newsJsonObjRequest;          // JSON Object for data retrieved
+            JSONObject newsJsonObjResponse;         // JSON Object for data retrieved from "response" object
+            JSONArray newsJsonArrayResults;         // JSON Object for data retrieved from "result" object
+
+            JSONObject currentNewsItem;        // Array of News Items
 
             String mNewsTitle = "";
             String mNewsSection = "";
@@ -175,17 +183,23 @@ public final class QueryUtils {
             String mNewsUrl = "";
             String mNewsThumbnail = "";
 
+            newsJsonObjRequest = new JSONObject(newsJSON);
+            // verify if "response" exists
+            if (newsJsonObjRequest.has("response")) {
+                newsJsonObjResponse = newsJsonObjRequest.getJSONObject("response");
 
-            newsJsonResponse = new JSONObject(newsJSON);
+                // verify if "results" exists
+                if (newsJsonObjResponse.has("results")) {
+                    newsJsonArrayResults = newsJsonObjResponse.getJSONArray("results");
 
-            // verify if "items" exists
-            if (newsJsonResponse.has("items")) {
-                newsJsonArray = newsJsonResponse.getJSONArray("items");
+                    for (int i = 0; i < newsJsonArrayResults.length(); i++) {
+                        currentNewsItem = newsJsonArrayResults.getJSONObject(i);
 
-                for (int i = 0; i < newsJsonArray.length(); i++) {
+                        if(currentNewsItem.has("webTitle")){
+                            mNewsTitle = currentNewsItem.getString("webTitle");
+                        }
 
-
-                    // Get List of Author if there are more than one, if exist
+                        // Get List of Author if there are more than one, if exist
                     /*
                     if (currVolumeInfo.has("authors")) {
                         authorsArray = currVolumeInfo.getJSONArray("authors");
@@ -204,14 +218,15 @@ public final class QueryUtils {
                     */
 
 
-                    // Create a new {@link NewsItem} object from the JSON response.
-                    NewsItem newsItem = new NewsItem(mNewsTitle, mNewsSection, mNewsPublishedDate,
-                            mNewsAuthor, mNewsUrl, mNewsThumbnail);
+                        // Create a new {@link NewsItem} object from the JSON response.
+                        NewsItem newsItem = new NewsItem(mNewsTitle, mNewsSection, mNewsPublishedDate,
+                                mNewsAuthor, mNewsUrl, mNewsThumbnail);
 
-                    // Add the new {@link NewsItem} to the list of news.
-                    news.add(newsItem);
+                        // Add the new {@link NewsItem} to the list of news.
+                        news.add(newsItem);
 
-                    Log.i(LOG_TAG, "Log - extractNewsItemFromJson() method");
+                        Log.i(LOG_TAG, "Log - extractNewsItemFromJson() method");
+                    }
                 }
             }
         } catch (JSONException e) {

@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
                 // Find the current newsItem that was clicked on
                 NewsItem currNewsItem = mAdapter.getItem(position);
 
-                String newsUri = ""; //currNewsItem.getURL
+                String newsUri = currNewsItem.getmNewsUrl();
 
                 // Create a new intent to view the news item in the browser
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(newsUri));
