@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
      * Constant value for the newsItem loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
      */
-    private static final int NEWS_LOADER_ID = 1;
+    private static final int NEWS_ITEM_LOADER_ID = 1;
 
     /**
      * URL for news item data from the Google Book API dataset
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
-            loaderManager.initLoader(NEWS_LOADER_ID, null, this);
+            loaderManager.initLoader(NEWS_ITEM_LOADER_ID, null, this);
 
             Log.i(LOG_TAG, "Log - After initLoader() call");
 
@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity
 
         Uri baseUri = Uri.parse(OPEN_NEWS_ITEM_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendQueryParameter("q", query);
-       // uriBuilder.appendQueryParameter("maxResults", MAX_RESULT);
+        //uriBuilder.appendQueryParameter("q", query);
+        // uriBuilder.appendQueryParameter("maxResults", MAX_RESULT);
 
         // Create a new loader for the given URL
         return new NewsItemLoader(this, uriBuilder.toString());
