@@ -2,6 +2,9 @@
     <!-- String for app name -->
     <string name="app_name">My News App</string>
 
+    <!-- String for label activity main -->
+    <string name="label_main">The Guardian News App</string>
+
     <!-- Text to display application label in splash screen -->
     <string name="legal_property">FDP Development - rev.1.0</string>
 

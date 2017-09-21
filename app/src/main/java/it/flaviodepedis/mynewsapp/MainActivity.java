@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
     private static final int NEWS_ITEM_LOADER_ID = 1;
 
     /**
-     * URL for news item data from the Google Book API dataset
+     * URL for news item data from The Guardian API
      */
     private static String OPEN_NEWS_ITEM_REQUEST_URL =
             "https://content.guardianapis.com/search?";

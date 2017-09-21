@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Primary color of the app (shown in the app bar) -->
-    <color name="colorPrimary">#2B3D4D</color>
+    <color name="colorPrimary">#005689</color>
 
     <!-- Primary dark color of the app (shown in the status bar) -->
-    <color name="colorPrimaryDark">#23303D</color>
+    <color name="colorPrimaryDark">#FF023A5B</color>
 
     <!-- Accent color of the app -->
     <color name="colorAccent">#10CAC9</color>
@@ -14,5 +14,20 @@
 
     <!-- Color for text in Splash Screen activity-->
     <color name="colorTextSplashScreen">#fdfdfe</color>
+
+    <!-- Color for text in Splash Screen activity-->
+    <color name="colorTextListItem">#e9e9f2</color>
+
+    <!-- Color for Title text of news-->
+    <color name="colorTitleText">#005689</color>
+
+    <!-- Color for Author text of news-->
+    <color name="colorAuthorText">#6c6e6e</color>
+
+    <!-- Color for Section text of news-->
+    <color name="colorSectionText">#d98d3b</color>
+
+    <!-- Color for Section text of news-->
+    <color name="colorPublishedDateText">#0d0d0d</color>
 
 </resources>
