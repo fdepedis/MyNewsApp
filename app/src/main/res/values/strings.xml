@@ -3,7 +3,7 @@
     <string name="app_name">My News App</string>
 
     <!-- Text to display application label in splash screen -->
-    <string name="legal_property">FDP development - rev.1.0</string>
+    <string name="legal_property">FDP Development - rev.1.0</string>
 
 
 </resources>
