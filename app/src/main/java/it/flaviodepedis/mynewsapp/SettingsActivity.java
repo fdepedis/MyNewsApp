@@ -34,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
 
-        // E' unmetodo con una struttura abbastanza standard e riutilizzabile in altri progetti
+        // E' un metodo con una struttura abbastanza standard e riutilizzabile in altri progetti
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
 
@@ -55,7 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
             return true;
         }
 
-        // E' unmetodo con una struttura abbastanza standard e riutilizzabile in altri progetti
+        // E' un metodo con una struttura abbastanza standard e riutilizzabile in altri progetti
         private void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());

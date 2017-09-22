@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/settings_title">
+    android:title="@string/title_activity_settings">
 
     <ListPreference
-        android:entries="@array/settings_languages_labels"
-        android:entryValues="@array/settings_languages_values"
-        android:defaultValue="@string/settings_languages_default"
-        android:key="@string/settings_languages_key"
-        android:title="@string/settings_languages_label" />
-
-    <EditTextPreference
-        android:defaultValue="@string/settings_count_default"
-        android:inputType="numberDecimal"
-        android:key="@string/settings_count_key"
-        android:selectAllOnFocus="true"
-        android:title="@string/settings_count_label" />
-
+        android:entries="@array/settings_section_labels"
+        android:entryValues="@array/settings_section_values"
+        android:defaultValue="@string/settings_section_default"
+        android:key="@string/settings_section_key"
+        android:title="@string/settings_section_label" />
 
 </PreferenceScreen>

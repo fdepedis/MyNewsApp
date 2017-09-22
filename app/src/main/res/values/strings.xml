@@ -44,6 +44,48 @@
     <!-- Strings related to Settings -->
     <string name="title_activity_settings">Settings</string>
 
+    <!-- Settings Menu Item -->
+    <string name="settings_menu_item">Settings</string>
 
+    <!--  -->
+    <!-- Strings for Section Preference -->
+    <string name="settings_section_label">Section</string>
+    <string name="settings_section_key" translatable="false">section</string>
+    <string name="settings_section_default" translatable="false">@string/settings_section_world_value</string>
+
+    <!-- String for Section Option (label/value)-->
+    <string name="settings_section_home_label">Home</string>
+    <string name="settings_section_home_value" translatable="false">home</string>
+
+    <string name="settings_section_world_label">World</string>
+    <string name="settings_section_world_value" translatable="false">world</string>
+
+    <string name="settings_section_env_label">Environment</string>
+    <string name="settings_section_env_value" translatable="false">environment</string>
+
+    <string name="settings_section_business_label">Business</string>
+    <string name="settings_section_business_value" translatable="false">business</string>
+
+    <string name="settings_section_sport_label">Sport</string>
+    <string name="settings_section_sport_value" translatable="false">sport</string>
+
+    <string name="settings_section_education_label">Education</string>
+    <string name="settings_section_education_value" translatable="false">education</string>
+
+    <string name="settings_section_weather_label">Weather</string>
+    <string name="settings_section_weather_value" translatable="false">weather</string>
+
+    <string name="settings_section_film_label">Film</string>
+    <string name="settings_section_film_value" translatable="false">film</string>
+
+    <string name="settings_section_politics_label">Politics</string>
+    <string name="settings_section_politics_value" translatable="false">politics</string>
+
+    <string name="settings_section_tech_label">Technology</string>
+    <string name="settings_section_tech_value" translatable="false">technology</string>
+
+    <string name="settings_section_fashion_label">Fashion</string>
+    <string name="settings_section_fashion_value" translatable="false">fashion</string>
+    <!--  -->
 
 </resources>

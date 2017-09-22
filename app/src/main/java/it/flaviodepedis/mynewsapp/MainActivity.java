@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -34,8 +36,10 @@ public class MainActivity extends AppCompatActivity
     /**
      * URL for news item data from The Guardian API
      */
-    private static String OPEN_NEWS_ITEM_REQUEST_URL =
-            "https://content.guardianapis.com/search?";
+    private static final String OPEN_NEWS_ITEM_REQUEST_BASE_URL =
+            "https://content.guardianapis.com/search?q=";
+    private static final String OPEN_NEWS_ITEM_REQUEST_SEARCH_URL =
+            "https://content.guardianapis.com/search?section=";
 
     /**
      * TextView that is displayed when the list is empty
@@ -112,12 +116,19 @@ public class MainActivity extends AppCompatActivity
     public Loader<List<NewsItem>> onCreateLoader(int id, Bundle args) {
 
         Log.i(LOG_TAG, "Log - onCreateLoader() method");
+        String url = "";
 
-        String section = "sport";
+        // prendere la preference di "section"
+        String section = "world";                                                        //pref
 
-        Uri baseUri = Uri.parse(OPEN_NEWS_ITEM_REQUEST_URL);
+        if(section.equalsIgnoreCase("home")){
+            url = OPEN_NEWS_ITEM_REQUEST_BASE_URL + section;
+        } else {
+            url = OPEN_NEWS_ITEM_REQUEST_SEARCH_URL + section;
+        }
+
+        Uri baseUri = Uri.parse(url);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendQueryParameter("section", section);                            //pref
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("from-date", "2017-01-01");                     //pref
         uriBuilder.appendQueryParameter("page-size", "5");                              //pref
@@ -176,6 +187,23 @@ public class MainActivity extends AppCompatActivity
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
