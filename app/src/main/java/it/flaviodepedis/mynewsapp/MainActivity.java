@@ -3,9 +3,11 @@ package it.flaviodepedis.mynewsapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +42,16 @@ public class MainActivity extends AppCompatActivity
             "https://content.guardianapis.com/search?q=";
     private static final String OPEN_NEWS_ITEM_REQUEST_SEARCH_URL =
             "https://content.guardianapis.com/search?section=";
+
+    /**
+     * Destination Url
+     */
+    private String url;
+
+    /**
+     * Section valueted from SharedPreferences
+     */
+    private String section;
 
     /**
      * TextView that is displayed when the list is empty
@@ -116,10 +128,13 @@ public class MainActivity extends AppCompatActivity
     public Loader<List<NewsItem>> onCreateLoader(int id, Bundle args) {
 
         Log.i(LOG_TAG, "Log - onCreateLoader() method");
-        String url = "";
 
-        // prendere la preference di "section"
-        String section = "world";                                                        //pref
+
+        // Costruisce la URL da inviare, leggendo i valori impostati nelle SharedPreferences
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        section = sharedPrefs.getString(
+                getString(R.string.settings_section_key),
+                getString(R.string.settings_section_default));
 
         if(section.equalsIgnoreCase("home")){
             url = OPEN_NEWS_ITEM_REQUEST_BASE_URL + section;

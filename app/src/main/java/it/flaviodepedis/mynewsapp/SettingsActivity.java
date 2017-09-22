@@ -26,11 +26,9 @@ public class SettingsActivity extends AppCompatActivity {
 
             // Given the key of a count event meteo preferences, we can use PreferenceFragment's findPreference()
             // method to get the Preference object and setup the preference
-            //Preference countEvent = findPreference(getString(R.string.settings_count_key));
-            //bindPreferenceSummaryToValue(countEvent);
+            Preference section = findPreference(getString(R.string.settings_section_key));
+            bindPreferenceSummaryToValue(section);
 
-            //Preference languages = findPreference(getString(R.string.settings_languages_key));
-            //bindPreferenceSummaryToValue(languages);
         }
 
 

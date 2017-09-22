@@ -51,7 +51,7 @@
     <!-- Strings for Section Preference -->
     <string name="settings_section_label">Section</string>
     <string name="settings_section_key" translatable="false">section</string>
-    <string name="settings_section_default" translatable="false">@string/settings_section_world_value</string>
+    <string name="settings_section_default" translatable="false">@string/settings_section_home_value</string>
 
     <!-- String for Section Option (label/value)-->
     <string name="settings_section_home_label">Home</string>
