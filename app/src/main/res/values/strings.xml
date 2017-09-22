@@ -1,6 +1,6 @@
 <resources>
     <!-- String for app name -->
-    <string name="app_name">My News App</string>
+    <string name="app_name">My Guardian App</string>
 
     <!-- String for label activity main -->
     <string name="label_main">The Guardian News</string>
