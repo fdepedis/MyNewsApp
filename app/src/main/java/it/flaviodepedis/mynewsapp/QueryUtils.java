@@ -5,14 +5,13 @@ package it.flaviodepedis.mynewsapp;
  */
 
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.text.TextUtils;
-
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -24,7 +23,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -169,18 +171,20 @@ public final class QueryUtils {
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
+            JSONObject newsJsonObjRequest;          // JSONObject for data retrieved
+            JSONObject newsJsonObjResponse;         // JSONObject for data retrieved from "response" object
+            JSONObject newsJsonObjFields;           // JSONObject for data retrieved from "fields" object
+            JSONObject currentNewsItem;             // Current News Items
+            JSONObject currentNewsItemTags;         // Current News Items Tags
 
-            JSONObject newsJsonObjRequest;          // JSON Object for data retrieved
-            JSONObject newsJsonObjResponse;         // JSON Object for data retrieved from "response" object
-            JSONArray newsJsonArrayResults;         // JSON Object for data retrieved from "result" object
+            JSONArray newsJsonArrayTags;            // JSONObject for data retrieved from "tags" object
+            JSONArray newsJsonArrayResults;         // JSONArray for data retrieved from "result" object
 
-            JSONObject currentNewsItem;        // Array of News Items
-
-            String mNewsTitle = "";
-            String mNewsSection = "";
-            String mNewsPublishedDate = "";
+            String mNewsTitle;
+            String mNewsSection;
+            String mNewsPublishedDate;
             String mNewsAuthor = "";
-            String mNewsUrl = "";
+            String mNewsUrl;
             String mNewsThumbnail = "";
 
             newsJsonObjRequest = new JSONObject(newsJSON);
@@ -195,28 +199,74 @@ public final class QueryUtils {
                     for (int i = 0; i < newsJsonArrayResults.length(); i++) {
                         currentNewsItem = newsJsonArrayResults.getJSONObject(i);
 
-                        if(currentNewsItem.has("webTitle")){
+                        // verify if "webTitle" exists
+                        if (currentNewsItem.has("webTitle")) {
                             mNewsTitle = currentNewsItem.getString("webTitle");
+                        } else {
+                            mNewsTitle = mContext.getResources().getString(R.string.no_title);
                         }
 
-                        // Get List of Author if there are more than one, if exist
-                    /*
-                    if (currVolumeInfo.has("authors")) {
-                        authorsArray = currVolumeInfo.getJSONArray("authors");
-
-                        // Verify if the author is one or more then one
-                        if (authorsArray.length() > 1) {
-                            authorsList = authorsArray.join(", ").replaceAll("\"", "");
-                        } else if (authorsArray.length() == 1) {
-                            authorsList = authorsArray.getString(0);
-                        } else if (authorsArray.length() == 0) {
-                            authorsList = mContext.getResources().getString(R.string.no_author);
+                        // verify if "sectionName" exists
+                        if (currentNewsItem.has("sectionName")) {
+                            mNewsSection = currentNewsItem.getString("sectionName");
+                        } else {
+                            mNewsSection = mContext.getResources().getString(R.string.no_section);
                         }
-                    } else {
-                        authorsList = mContext.getResources().getString(R.string.no_author);
-                    }
-                    */
 
+                        // verify if "webPublicationDate" exists
+                        if (currentNewsItem.has("webPublicationDate")) {
+                            mNewsPublishedDate = currentNewsItem.getString("webPublicationDate");
+                            // convert the String into Date
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                            try {
+                                Date date = format.parse(mNewsPublishedDate);
+
+                                // format the date and cast it to String again
+                                mNewsPublishedDate = (String) DateFormat.format("MMM" + " " + "dd" + ", " + "yyyy", date);
+                            } catch (ParseException e) {
+                                Log.e(LOG_TAG, "An exception was encountered while trying to parse a date " + e);
+                                mNewsPublishedDate = mContext.getResources().getString(R.string.no_date);
+                            }
+                        } else {
+                            mNewsPublishedDate = mContext.getResources().getString(R.string.no_date);
+                        }
+
+                        // verify if "webUrl" exists
+                        if (currentNewsItem.has("webUrl")) {
+                            mNewsUrl = currentNewsItem.getString("webUrl");
+                        } else {
+                            mNewsUrl = mContext.getResources().getString(R.string.no_web_url);
+                        }
+
+                        // verify if "fields" exists
+                        if (currentNewsItem.has("fields")) {
+                            newsJsonObjFields = currentNewsItem.getJSONObject("fields");
+
+                            // verify if "thumbnail" exists
+                            if (newsJsonObjFields.has("thumbnail")) {
+                                mNewsThumbnail = newsJsonObjFields.getString("thumbnail");
+                            } else {
+                                mNewsThumbnail = "";
+                            }
+                        }
+
+                        // verify if "authors" exists
+                        if (currentNewsItem.has("tags")) {
+                            newsJsonArrayTags = currentNewsItem.getJSONArray("tags");
+
+                            for (int j = 0; j < newsJsonArrayTags.length(); j++) {
+                                currentNewsItemTags = newsJsonArrayTags.getJSONObject(j);
+
+                                // verify if "webTitle" for "authors" exists
+                                if (currentNewsItemTags.has("webTitle")) {
+                                    mNewsAuthor = currentNewsItemTags.getString("webTitle");
+                                } else {
+                                    mNewsAuthor = mContext.getResources().getString(R.string.no_author);
+                                }
+                            }
+                        } else {
+                            mNewsAuthor = mContext.getResources().getString(R.string.no_author);
+                        }
 
                         // Create a new {@link NewsItem} object from the JSON response.
                         NewsItem newsItem = new NewsItem(mNewsTitle, mNewsSection, mNewsPublishedDate,

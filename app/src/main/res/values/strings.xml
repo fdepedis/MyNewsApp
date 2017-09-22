@@ -14,4 +14,19 @@
     <!-- Error message when there is no internet connectivity -->
     <string name="no_internet_connection">No internet connection.</string>
 
+    <!-- Text to display no title information -->
+    <string name="no_title">No title available</string>
+
+    <!-- Text to display no section name information -->
+    <string name="no_section">No section available</string>
+
+    <!-- Text to display no section name information -->
+    <string name="no_web_url">No web URL available</string>
+
+    <!-- Text to display no published date information -->
+    <string name="no_date">No date available</string>
+
+    <!-- Text to display no author information -->
+    <string name="no_author">No author available</string>
+
 </resources>
