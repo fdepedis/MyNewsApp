@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null"
+        android:divider="@dimen/divider_margin"
         android:dividerHeight="0dp"/>
 
     <!-- Empty view is only visible when the list has no items. -->
