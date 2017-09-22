@@ -88,4 +88,12 @@
     <string name="settings_section_fashion_value" translatable="false">fashion</string>
     <!--  -->
 
+    <!--  -->
+    <!-- Strings for Page Size Preference -->
+    <string name="settings_page_size_label">Number of pages</string>
+    <string name="settings_page_size_key" translatable="false">page-size</string>
+    <string name="settings_page_size_default">10</string>
+    <!--  -->
+
+
 </resources>

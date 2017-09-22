@@ -49,9 +49,14 @@ public class MainActivity extends AppCompatActivity
     private String url;
 
     /**
-     * Section valueted from SharedPreferences
+     * Section enhanced from SharedPreferences
      */
     private String section;
+
+    /**
+     * Page-size enhanced from SharedPreferences
+     */
+    private String pageSize;
 
     /**
      * TextView that is displayed when the list is empty
@@ -136,6 +141,11 @@ public class MainActivity extends AppCompatActivity
                 getString(R.string.settings_section_key),
                 getString(R.string.settings_section_default));
 
+        pageSize = sharedPrefs.getString(
+                getString(R.string.settings_page_size_key),
+                getString(R.string.settings_page_size_default));
+
+
         if(section.equalsIgnoreCase("home")){
             url = OPEN_NEWS_ITEM_REQUEST_BASE_URL + section;
         } else {
@@ -146,7 +156,7 @@ public class MainActivity extends AppCompatActivity
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("from-date", "2017-01-01");                     //pref
-        uriBuilder.appendQueryParameter("page-size", "5");                              //pref
+        uriBuilder.appendQueryParameter("page-size", pageSize);
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("show-fields", "headline,thumbnail,short-url");
         uriBuilder.appendQueryParameter("order-by", "relevance");                       //pref

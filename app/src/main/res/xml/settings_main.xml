@@ -10,4 +10,11 @@
         android:key="@string/settings_section_key"
         android:title="@string/settings_section_label" />
 
+    <EditTextPreference
+        android:defaultValue="@string/settings_page_size_default"
+        android:inputType="numberDecimal"
+        android:key="@string/settings_page_size_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_page_size_label" />
+
 </PreferenceScreen>
