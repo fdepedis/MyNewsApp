@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Helper methods related to requesting and receiving news item data from TheGuardian API.
@@ -216,17 +217,6 @@ public final class QueryUtils {
                         // verify if "webPublicationDate" exists
                         if (currentNewsItem.has("webPublicationDate")) {
                             mNewsPublishedDate = currentNewsItem.getString("webPublicationDate");
-                            // convert the String into Date
-                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-                            try {
-                                Date date = format.parse(mNewsPublishedDate);
-
-                                // format the date and cast it to String again
-                                mNewsPublishedDate = (String) DateFormat.format("MMM" + " " + "dd" + ", " + "yyyy", date);
-                            } catch (ParseException e) {
-                                Log.e(LOG_TAG, "An exception was encountered while trying to parse a date " + e);
-                                mNewsPublishedDate = mContext.getResources().getString(R.string.no_date);
-                            }
                         } else {
                             mNewsPublishedDate = mContext.getResources().getString(R.string.no_date);
                         }

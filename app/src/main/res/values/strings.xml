@@ -8,6 +8,15 @@
     <!-- Text to display application label in splash screen -->
     <string name="legal_property">FDP Development - rev.1.0</string>
 
+    <!-- String for label Date -->
+    <string name="label_date">Date:</string>
+
+    <!-- String for label Author -->
+    <string name="label_author">Author:</string>
+
+    <!-- String for label Section -->
+    <string name="label_section">Section:</string>
+
     <!-- Text to display no news item information -->
     <string name="no_news_item">No news item available</string>
 
@@ -28,5 +37,8 @@
 
     <!-- Text to display no author information -->
     <string name="no_author">No author available</string>
+
+    <!-- Text to display no author information -->
+    <string name="no_date_parsing">Problem parsing the Date fo News Item</string>
 
 </resources>

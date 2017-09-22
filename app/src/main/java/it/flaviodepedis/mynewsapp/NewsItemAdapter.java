@@ -1,14 +1,22 @@
 package it.flaviodepedis.mynewsapp;
 
 import android.content.Context;
+
 import com.squareup.picasso.Picasso;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +27,16 @@ import butterknife.ButterKnife;
 public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
 
     /**
+     * Tag for the log messages
+     */
+    private static final String LOG_TAG = NewsItemAdapter.class.getSimpleName();
+
+    /**
+     * Context of the caller activity
+     */
+    private static Context mContext;
+
+    /**
      * Constructs a new {@link NewsItemAdapter}.
      *
      * @param context   of the app
@@ -26,12 +44,14 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
      */
     public NewsItemAdapter(Context context, List<NewsItem> newsItems) {
         super(context, 0, newsItems);
+        mContext = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         String imageIcon;
+        String date;
 
         // Check if there is an existing list item view (called convertView) that we can reuse,
         // otherwise, if convertView is not null, then inflate a new list item layout.
@@ -52,8 +72,11 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
         // Set title of the news
         holder.tvNewsTitle.setText(currentNewsItem.getmNewsTitle());
 
-        // Set authors of the news if available
-        holder.tvNewsAuthors.setText(currentNewsItem.getmNewsAuthor());
+        // Set authors of the news
+        holder.tvNewsAuthors.setText(String.format(
+                mContext.getResources().getString(R.string.label_author)
+                        + " "
+                        + currentNewsItem.getmNewsAuthor()));
 
         // Set image icon of the news if available.
         // Use Picasso library to load url thumbnail
@@ -64,11 +87,19 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
             Picasso.with(getContext()).load(R.drawable.image_not_found).into(holder.imgNewsIcon);
         }
 
-        // Set the published date of the news if available
-        holder.tvNewsPublishedDate.setText(currentNewsItem.getmNewsPublishedDate());
+        // Set the published date of the news
+        date = currentNewsItem.getmNewsPublishedDate();
+        date = formatDate(date);
+        holder.tvNewsPublishedDate.setText(String.format(
+                mContext.getResources().getString(R.string.label_date)
+                        + " "
+                        + date));
 
-        // Set the section name of the news if available
-        holder.tvNewsSection.setText(currentNewsItem.getmNewsSection());
+        // Set the section name of the news
+        holder.tvNewsSection.setText(String.format(
+                mContext.getResources().getString(R.string.label_section)
+                        + " "
+                        + currentNewsItem.getmNewsSection()));
 
         return listItemView;
     }
@@ -89,5 +120,27 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+    }
+
+    /**
+     * Method to format Date fo published news item
+     */
+    public String formatDate(String dateNewItem) {
+
+        String dateFormatted = "";
+        String dateNew = dateNewItem.substring(0, 10); // gets date in yyyy-mm-dd format from timestamp
+
+        // Format dateNew
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        SimpleDateFormat newFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ITALIAN);
+        try {
+            Date date = inputFormat.parse(dateNewItem);
+            dateFormatted = newFormat.format(date);
+        }
+        catch(ParseException e) {
+            Log.e(LOG_TAG, mContext.getResources().getString(R.string.no_date_parsing), e);
+        }
+
+        return dateFormatted;
     }
 }
