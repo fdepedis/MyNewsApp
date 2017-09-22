@@ -41,4 +41,9 @@
     <!-- Text to display no author information -->
     <string name="no_date_parsing">Problem parsing the Date fo News Item</string>
 
+    <!-- Strings related to Settings -->
+    <string name="title_activity_settings">Settings</string>
+
+
+
 </resources>
