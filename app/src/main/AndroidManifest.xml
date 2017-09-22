@@ -14,9 +14,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/label_main"/>
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/label_main" />
         <activity android:name=".NewsItemAdapter" />
-        <activity android:name=".SplashScreenActivity"
+        <activity
+            android:name=".SplashScreenActivity"
             android:theme="@style/SplashScreenStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
