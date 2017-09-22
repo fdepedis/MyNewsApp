@@ -128,11 +128,11 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
     public String formatDate(String dateNewItem) {
 
         String dateFormatted = "";
-        String dateNew = dateNewItem.substring(0, 10); // gets date in yyyy-mm-dd format from timestamp
+        //String dateNew = dateNewItem.substring(0, 10);
 
         // Format dateNew
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        SimpleDateFormat newFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ITALIAN);
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+        SimpleDateFormat newFormat = new SimpleDateFormat("MMM dd, yyyy - HH:mm", Locale.ENGLISH);
         try {
             Date date = inputFormat.parse(dateNewItem);
             dateFormatted = newFormat.format(date);

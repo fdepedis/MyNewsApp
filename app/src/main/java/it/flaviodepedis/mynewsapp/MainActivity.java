@@ -59,6 +59,11 @@ public class MainActivity extends AppCompatActivity
     private String pageSize;
 
     /**
+     * Order-by enhanced from SharedPreferences
+     */
+    private String orderBy;
+
+    /**
      * TextView that is displayed when the list is empty
      */
     private TextView mEmptyStateTextView;
@@ -145,6 +150,10 @@ public class MainActivity extends AppCompatActivity
                 getString(R.string.settings_page_size_key),
                 getString(R.string.settings_page_size_default));
 
+        orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default));
+
 
         if(section.equalsIgnoreCase("home")){
             url = OPEN_NEWS_ITEM_REQUEST_BASE_URL + section;
@@ -159,7 +168,7 @@ public class MainActivity extends AppCompatActivity
         uriBuilder.appendQueryParameter("page-size", pageSize);
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("show-fields", "headline,thumbnail,short-url");
-        uriBuilder.appendQueryParameter("order-by", "relevance");                       //pref
+        uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("api-key", "test");
 
         // Create a new loader for the given URL

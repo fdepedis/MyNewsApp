@@ -32,5 +32,20 @@
     </string-array>
     <!-- Section -->
 
+    <!-- Order By -->
+    <!-- Order By Label -->
+    <string-array name="settings_order_by_labels">
+        <item>@string/settings_order_by_relevance_label</item>
+        <item>@string/settings_order_by_newest_label</item>
+        <item>@string/settings_order_by_oldest_label</item>
+    </string-array>
+
+    <!-- Order By Values -->
+    <string-array name="settings_order_by_values">
+        <item>@string/settings_order_by_relevance_value</item>
+        <item>@string/settings_order_by_newest_value</item>
+        <item>@string/settings_order_by_oldest_value</item>
+    </string-array>
+    <!-- Order By -->
 
 </resources>
