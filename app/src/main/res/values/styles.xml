@@ -8,9 +8,63 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- Splash Screen -->
+    <!-- Splash Screen Style -->
     <style name="SplashScreenStyle" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimaryDark">@color/colorPrimary</item>
+    </style>
+
+    <!-- Text Title Style -->
+    <style name="TextTitleStyle" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textColor">@color/colorTitleText</item>
+    </style>
+
+    <!-- Text Section Style -->
+    <style name="TextSectionStyle" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textColor">@color/colorSectionText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Text Author Style -->
+    <style name="TextAuthorStyle" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textColor">@color/colorAuthorText</item>
+    </style>
+
+    <!-- Text Date Style -->
+    <style name="TextDateStyle" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textColor">@color/colorAuthorText</item>
+    </style>
+
+    <!-- Image News Item Style -->
+    <style name="ImageNewsItemStyle" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:src">@drawable/image_not_found</item>
     </style>
 
 </resources>
