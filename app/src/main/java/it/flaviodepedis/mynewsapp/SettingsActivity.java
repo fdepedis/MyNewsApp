@@ -37,7 +37,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         }
 
-
         // E' un metodo con una struttura abbastanza standard e riutilizzabile in altri progetti
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {

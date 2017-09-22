@@ -164,7 +164,6 @@ public class MainActivity extends AppCompatActivity
         Uri baseUri = Uri.parse(url);
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder.appendQueryParameter("format", "json");
-        uriBuilder.appendQueryParameter("from-date", "2017-01-01");                     //pref
         uriBuilder.appendQueryParameter("page-size", pageSize);
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("show-fields", "headline,thumbnail,short-url");
