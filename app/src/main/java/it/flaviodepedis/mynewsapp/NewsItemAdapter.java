@@ -1,9 +1,7 @@
 package it.flaviodepedis.mynewsapp;
 
 import android.content.Context;
-
 import com.squareup.picasso.Picasso;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

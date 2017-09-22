@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +26,12 @@ import java.util.List;
  * Created by flavio.depedis on 21/09/2017.
  */
 public class MainActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<List<NewsItem>> {
+        implements LoaderManager.LoaderCallbacks<List<NewsItem>>,
+        SwipeRefreshLayout.OnRefreshListener {
 
+    /**
+     * Constant LOG_TAG for the MainActivity
+     */
     private static final String LOG_TAG = MainActivity.class.getName();
 
     /**
@@ -73,11 +78,21 @@ public class MainActivity extends AppCompatActivity
      */
     private NewsItemAdapter mAdapter;
 
+    /**
+     * Swipe refresh list
+     */
+    private SwipeRefreshLayout mSwipeRefreshList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Manage Swipe Container
+        mSwipeRefreshList = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_list);
+        mSwipeRefreshList.setOnRefreshListener(this);
+        mSwipeRefreshList.setColorSchemeResources(R.color.red, R.color.orange, R.color.blue, R.color.green);
 
         // Find a reference to the {@link ListView} in the layout
         ListView newsItemListView = (ListView) findViewById(R.id.list);
@@ -139,7 +154,6 @@ public class MainActivity extends AppCompatActivity
 
         Log.i(LOG_TAG, "Log - onCreateLoader() method");
 
-
         // Costruisce la URL da inviare, leggendo i valori impostati nelle SharedPreferences
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         section = sharedPrefs.getString(
@@ -153,7 +167,6 @@ public class MainActivity extends AppCompatActivity
         orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
-
 
         if(section.equalsIgnoreCase("home")){
             url = OPEN_NEWS_ITEM_REQUEST_BASE_URL + section;
@@ -179,6 +192,8 @@ public class MainActivity extends AppCompatActivity
 
         Log.i(LOG_TAG, "Log - onLoadFinished() method");
 
+        mSwipeRefreshList.setRefreshing(false);
+
         // Hide loading indicator because the data has been loaded
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
@@ -203,6 +218,15 @@ public class MainActivity extends AppCompatActivity
 
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
+    }
+
+    /**
+     * Whenever swipe refresh starts we get callback here.Here we can place our logic.
+     */
+    @Override
+    public void onRefresh() {
+        Log.i(LOG_TAG , "||onRefresh called||");
+        getLoaderManager().restartLoader(NEWS_ITEM_LOADER_ID , null , this);
     }
 
     /**
@@ -238,5 +262,6 @@ public class MainActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
 

@@ -30,4 +30,10 @@
     <!-- Color for Section text of news-->
     <color name="colorPublishedDateText">#0d0d0d</color>
 
+    <!-- Color for Swipe Refresh List -->
+    <color name="red">#ff0000</color>
+    <color name="orange">#FF9900</color>
+    <color name="green">#009900</color>
+    <color name="blue">#000099</color>
+
 </resources>
